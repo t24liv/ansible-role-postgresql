@@ -30,7 +30,8 @@ postgresql_ext_postgis_version: "2.1" # be careful: check whether the postgresql
 postgresql_databases: []
 
 # List of database extensions to be created (optional)
-postgresql_database_extensions: []
+#postgresql_database_extensions: []
+postgresql_database_extensions:
 
 # List of users to be created (optional)
 postgresql_users: []
