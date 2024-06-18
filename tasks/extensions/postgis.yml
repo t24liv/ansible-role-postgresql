@@ -8,9 +8,7 @@
     cache_valid_time: "{{apt_cache_valid_time | default (3600)}}"
   with_items:
     - libgeos-c1
-    - hostvars[inventory_hostname]['postgresql-' + postgresql_version + '-postgis-' + postgresql_ext_postgis_version]
-    - hostvars[inventory_hostname]['postgresql-' + postgresql_version + '-postgis-scripts']
-#    - "postgresql-{{postgresql_version}}-postgis-{{postgresql_ext_postgis_version}}"
-#    - "postgresql-{{postgresql_version}}-postgis-scripts"
+    - "postgresql-{{postgresql_version}}-postgis-{{postgresql_ext_postgis_version}}"
+    - "postgresql-{{postgresql_version}}-postgis-scripts"
   notify:
     - restart postgresql

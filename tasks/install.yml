@@ -42,12 +42,9 @@
     cache_valid_time: "{{apt_cache_valid_time | default (3600)}}"
   environment: "{{postgresql_env}}"
   with_items:
-    - hostvars[inventory_hostname]['postgresql-' + postgresql_version]
-    - hostvars[inventory_hostname]['postgresql-client-' + postgresql_version]
-    - hostvars[inventory_hostname]['postgresql-contrib-' + postgresql_version]
-    #- "postgresql-{{postgresql_version}}"
-    #- "postgresql-client-{{postgresql_version}}"
-    #- "postgresql-contrib-{{postgresql_version}}"
+    - "postgresql-{{postgresql_version}}"
+    - "postgresql-client-{{postgresql_version}}"
+    - "postgresql-contrib-{{postgresql_version}}"
 
 - name: PostgreSQL | PGTune
   apt:

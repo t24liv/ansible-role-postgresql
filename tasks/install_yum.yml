@@ -25,10 +25,8 @@
     state: present
   environment: "{{ postgresql_env }}"
   with_items:
-    - hostvars[inventory_hostname]['postgresql' + postgresql_version_terse + '-server']
-    - hostvars[inventory_hostname]['postgresql' + postgresql_version_terse]
-#    - "postgresql{{ postgresql_version_terse }}-server"
-#    - "postgresql{{ postgresql_version_terse }}"
+    - "postgresql{{ postgresql_version_terse }}-server"
+    - "postgresql{{ postgresql_version_terse }}"
 
 - name: PostgreSQL | PGTune
   yum:
