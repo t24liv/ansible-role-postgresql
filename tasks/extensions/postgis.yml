@@ -1,58 +1,13 @@
 # file: postgresql/tasks/extensions/postgis.yml
-#- name: PostgreSQL | Extensions | Make sure the postgis extensions are installed
-#  apt:
-#    name:
-#      #- libgeos-c1v5
-#      - "postgresql-{{ postgresql_version }}-postgis-{{ postgresql_ext_postgis_version }}"
-#      # - "postgresql-{{ postgresql_version }}-postgis-scripts"
-#      - "postgresql-{{ postgresql_version }}-postgis-{{ postgresql_ext_postgis_version }}-scripts"
-#    state: present
-#    update_cache: yes
-#    cache_valid_time: "{{ apt_cache_valid_time | default(3600) }}"
-#  notify:
-#    - restart postgresql
-
-- name: Update apt cache
-  apt:
-    update_cache: yes
-
-- name: Remove conflicting GEOS library versions
+- name: PostgreSQL | Extensions | Make sure the postgis extensions are installed
   apt:
     name:
-      - geos
-      - libgeos-3.5.0
-      - libgeos-c1v5
-      - libgeos-dev
-    state: absent
-
-- name: Remove any local GEOS libraries
-  file:
-    path: "/usr/local/lib/libgeos*"
-    state: absent
-
-- name: Install PostgreSQL, PostGIS, and GEOS
-  apt:
-    name:
-      - "postgresql-{{ postgresql_version }}"
+      #- libgeos-c1v5
       - "postgresql-{{ postgresql_version }}-postgis-{{ postgresql_ext_postgis_version }}"
-      - "postgresql-{{ postgresql_version }}-postgis-scripts"
-      - "postgis"
-      - "libgeos-3.5.0"
-      - "libgeos-c1v5"
-      - "libgeos-dev"
+      # - "postgresql-{{ postgresql_version }}-postgis-scripts"
+      - "postgresql-{{ postgresql_version }}-postgis-{{ postgresql_ext_postgis_version }}-scripts"
     state: present
-
-- name: PostgreSQL | Add postgis to the databases with the requirement
-  shell: >
-    {{ postgresql_bin_directory }}/psql {{ item.name }} --username {{ postgresql_admin_user }} -c 'CREATE EXTENSION IF NOT EXISTS postgis;'
-    && {{ postgresql_bin_directory }}/psql {{ item.name }} --username {{ postgresql_admin_user }} -c 'CREATE EXTENSION IF NOT EXISTS postgis_topology;'
-  become_user: "{{ postgresql_service_user }}"
-  with_items: "{{ postgresql_databases }}"
-  when: item.gis is defined and item.gis
-  register: result
-  changed_when: "'NOTICE' not in result.stderr"
-  ignore_errors: yes
-
-- name: Debug result
-  debug:
-    var: result
+    update_cache: yes
+    cache_valid_time: "{{ apt_cache_valid_time | default(3600) }}"
+  notify:
+    - restart postgresql
