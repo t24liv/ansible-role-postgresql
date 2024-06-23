@@ -3,7 +3,7 @@
 - name: PostgreSQL | Extensions | Make sure the postgis extensions are installed
   apt:
     name:
-      - libgeos-c1v5
+      #- libgeos-c1v5
       - "postgresql-{{ postgresql_version }}-postgis-{{ postgresql_ext_postgis_version }}"
       # - "postgresql-{{ postgresql_version }}-postgis-scripts"
       - "postgresql-{{ postgresql_version }}-postgis-{{ postgresql_ext_postgis_version }}-scripts"
