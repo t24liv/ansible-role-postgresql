@@ -22,7 +22,7 @@ ansible-galaxy install ANXS.postgresql
 
 ```yaml
 # Basic settings
-postgresql_version: 9.3
+postgresql_version: 9.5
 postgresql_encoding: 'UTF-8'
 postgresql_locale: 'en_US.UTF-8'
 
